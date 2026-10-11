@@ -1,21 +1,16 @@
-package q;
-import java.util.Scanner;
+package q.practice1;
 
 public class Lab_1 {
     public static void main (String [] args){
-        int summ=0;
-        Scanner sc= new Scanner(System.in);
-        int i = sc.nextInt();
-        int[] mass = new int[i];
+        long summ=0;
+        int[] mass = {1, 2, 3, 4};
         for (int j=0; j<mass.length; j++){
-            int r = sc.nextInt();
-            mass[j]=r;
             summ+=mass[j];
         }
         System.out.print("Сумма: ");
         System.out.println(summ);
         System.out.print("Ср. Арифм.: ");
-        System.out.println(summ/mass.length);
+        System.out.println((double) summ/mass.length);
     }
 }
 

@@ -1,4 +1,4 @@
-package q;
+package q.practice1;
 
 public class Prac_1_3 {
     public static  void main (String[] args){
