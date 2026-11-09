@@ -1,4 +1,4 @@
-package q.practice9;
+package q.practice9_10;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -58,12 +58,12 @@ public class SortingStudentsByGPA implements Comparator<Student> {
         b=mergeSort(b);
         return merge(a,b);
     }
-    public void quicksort(Student[] students,int left,int right){
+    public void quicksort(Student[] students,int left,int right,Comparator<Student> order){
         if (left>=right) return;
         int pos=left;
         Student oporniy=students[right];
         for (int i=left; i<right;i++){
-            if (compare(students[i],oporniy)<0){
+            if (order.compare(students[i],oporniy)<0){
                 Student temp=students[pos];
                 students[pos]=students[i];
                 students[i]=temp;
@@ -73,12 +73,14 @@ public class SortingStudentsByGPA implements Comparator<Student> {
         Student temp=students[pos];
         students[pos]=students[right];
         students[right]=temp;
-        quicksort(students,left,pos-1);
-        quicksort(students,pos+1,right);
+        quicksort(students,left,pos-1,order);
+        quicksort(students,pos+1,right,order);
+    }
+    public void quicksort(Comparator<Student> order){
+        quicksort(iDNumber,0,iDNumber.length-1,order);
     }
     public void quicksort(){
-        quicksort(iDNumber,0,iDNumber.length-1);
-    }
+        quicksort(iDNumber,0,iDNumber.length-1,this);}
     public void mergeSort(){
         iDNumber=mergeSort(iDNumber);
     }

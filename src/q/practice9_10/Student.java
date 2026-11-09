@@ -1,6 +1,8 @@
-package q.practice9;
-
+package q.practice9_10;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 public class Student {
+    private Date birthDate;
     private int id;
     private String name;
     private String lastname;
@@ -8,6 +10,11 @@ public class Student {
     private String spec;
     private int year;
     private String group;
+
+    public String formatStudentDateBirth(String pattern){
+        SimpleDateFormat f=new SimpleDateFormat(pattern);
+        return f.format(birthDate);
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -57,7 +64,7 @@ public class Student {
         return group;
     }
 
-    public Student(int id, String name, String lastname, String spec, int year, String group, int score) {
+    public Student(int id, String name, String lastname, String spec, int year, String group, int score,Date birthDate) {
         this.id = id;
         this.group = group;
         this.name = name;
@@ -65,6 +72,15 @@ public class Student {
         this.score = score;
         this.year = year;
         this.spec = spec;
+        this.birthDate=birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
     }
 
     public int getScore() {
@@ -77,6 +93,6 @@ public class Student {
 
     @Override
     public String toString() {
-        return "ID " + id + " name: " + name + " " + lastname + " Specialisation: " + spec + " Year: " + year + " Group: " + group + " Score:  " + score;
+        return "ID " + id + " name: " + name + " " + lastname + " Specialisation: " + spec + " Year: " + year + " Group: " + group + " Score:  " + score + " Birth date: " + formatStudentDateBirth("dd.MM.yyyy");
     }
 }
