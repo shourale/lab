@@ -4,46 +4,65 @@ import java.util.Scanner;
 
 public class TestShop {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scan = new Scanner(System.in);
         Shop shop = new Shop();
-        try {
-            System.out.print("Количество компьютеров: ");
-            int count = Integer.parseInt(scanner.nextLine());
-            if (count < 0) throw new IllegalArgumentException("Количество не может быть отрицательным");
-            for (int i = 0; i < count; i++) {
-                System.out.print("Модель: ");
-                String model = scanner.nextLine();
-                System.out.print("Цена в рублях (целое число): ");
-                shop.addComputer(new Computer(model, Integer.parseInt(scanner.nextLine())));
-            }
-            while (true) {
-                System.out.println("1 — добавить, 2 — удалить, 3 — найти, 4 — список, 0 — выход");
-                String command = scanner.nextLine();
-                switch (command) {
-                    case "0": return;
-                    case "1":
-                        System.out.print("Модель: ");
-                        String model = scanner.nextLine();
-                        System.out.print("Цена: ");
-                        shop.addComputer(new Computer(model, Integer.parseInt(scanner.nextLine())));
-                        break;
-                    case "2":
-                        System.out.print("Модель: ");
-                        System.out.println(shop.removeComputer(scanner.nextLine()) ? "Удалён" : "Не найден");
-                        break;
-                    case "3":
-                        System.out.print("Модель: ");
-                        Computer found = shop.findComputer(scanner.nextLine());
-                        System.out.println(found == null ? "Не найден" : found);
-                        break;
-                    case "4":
-                        for (Computer computer : shop.getComputers()) System.out.println(computer);
-                        break;
-                    default: System.out.println("Неизвестная команда");
-                }
-            }
-        } catch (IllegalArgumentException | java.util.NoSuchElementException error) {
-            System.out.println("Ошибка ввода: " + error.getMessage());
+        System.out.print("Количество компьютеров: ");
+        int count = scan.nextInt();
+        scan.nextLine();
+        if (count < 0) {
+            System.out.println("Количество не может быть отрицательным");
+            return;
         }
+        for (int i = 0; i < count; i++) {
+            addComputer(scan, shop);
+        }
+        while (true) {
+            System.out.println("1 — добавить, 2 — удалить, 3 — найти, 4 — список, 0 — выход");
+            String command = scan.nextLine();
+            switch (command) {
+                case "0":
+                    return;
+                case "1":
+                    addComputer(scan, shop);
+                    break;
+                case "2":
+                    System.out.print("Модель: ");
+                    if (shop.removeComputer(scan.nextLine())) {
+                        System.out.println("Удалён");
+                    } else {
+                        System.out.println("Не найден");
+                    }
+                    break;
+                case "3":
+                    System.out.print("Модель: ");
+                    Computer found = shop.findComputer(scan.nextLine());
+                    if (found == null) {
+                        System.out.println("Не найден");
+                    } else {
+                        System.out.println(found);
+                    }
+                    break;
+                case "4":
+                    for (Computer computer : shop.getComputers()) {
+                        System.out.println(computer);
+                    }
+                    break;
+                default:
+                    System.out.println("Неизвестная команда");
+            }
+        }
+    }
+
+    public static void addComputer(Scanner scan, Shop shop) {
+        System.out.print("Модель: ");
+        String model = scan.nextLine().trim();
+        System.out.print("Цена: ");
+        int price = scan.nextInt();
+        scan.nextLine();
+        if (model.isEmpty() || price < 0) {
+            System.out.println("Нужны модель и неотрицательная цена");
+            return;
+        }
+        shop.addComputer(new Computer(model, price));
     }
 }

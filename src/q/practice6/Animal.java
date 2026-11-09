@@ -1,7 +1,7 @@
 package q.practice6;
 
 public class Animal implements Nameable {
-    private final String name;
+    private String name;
 
     public Animal(String name) {
         this.name = name;

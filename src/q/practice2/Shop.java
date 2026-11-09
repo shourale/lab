@@ -4,7 +4,7 @@ public class Shop {
     private Computer[] computers = new Computer[0];
 
     public void addComputer(Computer computer) {
-        if (computer == null) throw new IllegalArgumentException("Компьютер не задан");
+        if (computer == null) return;
         Computer[] newComputers = new Computer[computers.length + 1];
         for (int i = 0; i < computers.length; i++) {
             newComputers[i] = computers[i];
@@ -38,6 +38,10 @@ public class Shop {
     }
 
     public Computer[] getComputers() {
-        return computers.clone();
+        Computer[] result = new Computer[computers.length];
+        for (int i = 0; i < computers.length; i++) {
+            result[i] = computers[i];
+        }
+        return result;
     }
 }

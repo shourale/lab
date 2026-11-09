@@ -6,7 +6,8 @@ import java.util.Scanner;
 public class Poker {
     public static String[] deal(int players) {
         if (players < 1 || players > 10) {
-            throw new IllegalArgumentException("Игроков должно быть от 1 до 10");
+            System.out.println("Игроков должно быть от 1 до 10");
+            return new String[0];
         }
         String[] deck = new String[52];
         String[] suits = {"♠", "♥", "♦", "♣"};
@@ -35,18 +36,14 @@ public class Poker {
     public static void main(String[] args) {
         System.out.print("Число игроков (1–10): ");
         Scanner scanner = new Scanner(System.in);
-        try {
-            int players = Integer.parseInt(scanner.nextLine());
-            String[] cards = deal(players);
-            for (int i = 0; i < players; i++) {
-                System.out.println("Игрок " + (i + 1));
-                for (int j = 0; j < 5; j++) {
-                    System.out.println(cards[i * 5 + j]);
-                }
-                System.out.println();
+        int players = scanner.nextInt();
+        String[] cards = deal(players);
+        for (int i = 0; i < cards.length / 5; i++) {
+            System.out.println("Игрок " + (i + 1));
+            for (int j = 0; j < 5; j++) {
+                System.out.println(cards[i * 5 + j]);
             }
-        } catch (IllegalArgumentException | java.util.NoSuchElementException error) {
-            System.out.println("Ошибка ввода: " + error.getMessage());
+            System.out.println();
         }
     }
 }

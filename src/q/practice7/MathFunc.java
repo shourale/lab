@@ -8,11 +8,14 @@ public class MathFunc implements MathCalculable {
 
     @Override
     public double complexModulus(double real, double imaginary) {
-        return Math.hypot(real, imaginary);
+        return Math.sqrt(real * real + imaginary * imaginary);
     }
 
     public double circumference(double radius) {
-        if (!Double.isFinite(radius) || radius < 0) throw new IllegalArgumentException("Некорректный радиус");
+        if (radius < 0) {
+            System.out.println("Радиус не может быть отрицательным");
+            return -1;
+        }
         return 2 * PI * radius;
     }
 }

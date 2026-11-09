@@ -1,35 +1,39 @@
 package q.practice1;
+
 import java.util.Scanner;
 
 public class Lab_2 {
-    public static void main ( String[] args){
-        Scanner sc=new Scanner(System.in);
-        int i = sc.nextInt();
-        if (i <= 0) {
-            System.out.println("Размер массива должен быть положительным");
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Размер массива: ");
+        int size = scan.nextInt();
+        if (size <= 0) {
+            System.out.println("Размер должен быть положительным");
             return;
         }
-        int j=0;
-        long summDo=0;
-        long summ=0;
-        int[] a=new int[i];
+        int[] numbers = new int[size];
+        int i = 0;
+        long sumDo = 0;
+        System.out.println("Введите элементы массива:");
         do {
-            a[j]=sc.nextInt();
-            summDo+=a[j];
-            j++;
-        }
-        while (j<a.length);
-        j=0;
-        int max=a[0];
-        int min=a[0];
+            numbers[i] = scan.nextInt();
+            sumDo += numbers[i];
+            i++;
+        } while (i < numbers.length);
 
-        while (j<a.length){
-            summ+=a[j];
-            if (min>a[j]) min=a[j];
-            if (max<a[j]) max=a[j];
-            j++;
+        i = 0;
+        long sumWhile = 0;
+        int min = numbers[0];
+        int max = numbers[0];
+        while (i < numbers.length) {
+            sumWhile += numbers[i];
+            if (numbers[i] < min) min = numbers[i];
+            if (numbers[i] > max) max = numbers[i];
+            i++;
         }
-        System.out.println("Сумма (do while): " + summDo);
-        System.out.println("Сумма (while): " + summ + " Макс: " + max + " Мин: " + min);
+        System.out.println("Сумма (do while): " + sumDo);
+        System.out.println("Сумма (while): " + sumWhile);
+        System.out.println("Минимум: " + min);
+        System.out.println("Максимум: " + max);
     }
 }

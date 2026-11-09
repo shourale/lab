@@ -16,6 +16,7 @@ public class Person {
     public void move() {
         System.out.println(fullName + " двигается");
     }
+
     public void talk() {
         System.out.println(fullName + " говорит");
     }
