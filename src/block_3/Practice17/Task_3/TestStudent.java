@@ -1,4 +1,4 @@
-package block_3.Practice17.Task_1;
+package block_3.Practice17.Task_3;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;

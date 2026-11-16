@@ -1,23 +1,25 @@
-package block_3.Practice17.Task_1;
+package block_3.Practice17.Task_2;
 
 public class StudentList {
     private Student head;
-
+    private Student tail;
     public StudentList() {
         head = null;
+        tail=null;
     }
-
     public void add(Student student) {
         if (head == null) {
             head = student;
+            tail=student;
             return;
         }
 
-        Student current = head;
-        while (current.next != null) {
-            current = current.next;
+        else{
+            tail.next=student;
+            student.prev=tail;
+            tail=student;
         }
-        current.next = student;
+
     }
 
     public boolean isEmpty() {
@@ -26,6 +28,7 @@ public class StudentList {
 
     public void empty() {
         head = null;
+        tail = null;
     }
 
     public void printStudent(int number) {
@@ -38,21 +41,25 @@ public class StudentList {
     }
 
     public boolean delete(int number) {
-        if (head == null || number < 1) {
+        if (head == null || tail == null || number < 1) {
             return false;
         }
         if (number == 1) {
             head = head.next;
+            head.prev=null;
             return true;
         }
-
         Student previous = findStudent(number - 1);
-        if (previous == null || previous.next == null) {
-            return false;
-        }
         previous.next = previous.next.next;
+        if (previous.next != null) {
+            previous.next.prev = previous;
+        }
+        else {
+            tail = previous;
+        }
         return true;
     }
+
 
     private Student findStudent(int number) {
         if (number < 1) {

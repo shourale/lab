@@ -10,6 +10,7 @@ public class StudentList {
     public void add(Student student) {
         if (head == null) {
             head = student;
+
             return;
         }
 

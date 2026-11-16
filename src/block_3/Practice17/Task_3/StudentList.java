@@ -1,7 +1,8 @@
-package block_3.Practice17.Task_1;
+package block_3.Practice17.Task_3;
 
 public class StudentList {
     private Student head;
+    private Student tail;
 
     public StudentList() {
         head = null;
@@ -10,15 +11,11 @@ public class StudentList {
     public void add(Student student) {
         if (head == null) {
             head = student;
-
-            return;
+        } else {
+            tail.next = student;
         }
-
-        Student current = head;
-        while (current.next != null) {
-            current = current.next;
-        }
-        current.next = student;
+        tail = student;
+        tail.next = head;
     }
 
     public boolean isEmpty() {
@@ -27,6 +24,7 @@ public class StudentList {
 
     public void empty() {
         head = null;
+        tail = null;
     }
 
     public void printStudent(int number) {
@@ -43,24 +41,37 @@ public class StudentList {
             return false;
         }
         if (number == 1) {
-            head = head.next;
+            if (head == tail) {
+                empty();
+            } else {
+                head = head.next;
+                tail.next = head;
+            }
             return true;
         }
 
         Student previous = findStudent(number - 1);
-        if (previous == null || previous.next == null) {
+        if (previous == null || previous == tail) {
             return false;
         }
-        previous.next = previous.next.next;
+
+        Student student = previous.next;
+        previous.next = student.next;
+        if (student == tail) {
+            tail = previous;
+        }
         return true;
     }
 
     private Student findStudent(int number) {
-        if (number < 1) {
+        if (head == null || number < 1) {
             return null;
         }
         Student current = head;
-        for (int position = 1; position < number && current != null; position++) {
+        for (int position = 1; position < number; position++) {
+            if (current.next == head) {
+                return null;
+            }
             current = current.next;
         }
         return current;

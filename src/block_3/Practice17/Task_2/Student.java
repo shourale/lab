@@ -1,4 +1,4 @@
-package block_3.Practice17.Task_1;
+package block_3.Practice17.Task_2;
 
 import java.util.Scanner;
 
@@ -7,6 +7,7 @@ public class Student {
     private int age;
     private String group;
     Student next;
+    Student prev;
 
     public void readFromConsole(Scanner scanner) {
         System.out.print("Введите имя: ");
